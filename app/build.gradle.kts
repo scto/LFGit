@@ -102,7 +102,7 @@ dependencies {
 
 	annotationProcessor(libs.androidx.room.compiler)
 
-	testImplementation(libs.androidx.room.room-testing)
+	testImplementation(libs.androidx.room.room.testing)
 
 	implementation(libs.compose.preference.library)
 
