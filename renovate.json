@@ -8,9 +8,9 @@
   "automerge": false,
   "lockFileMaintenance": {
     "enabled": true,
-    "automerge": false,
+    "automerge": true,
     "automergeType": "pr",
-    "platformAutomerge": false
+    "platformAutomerge": true
   },
   "includeForks": true
 }
