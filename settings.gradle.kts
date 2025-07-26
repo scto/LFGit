@@ -24,6 +24,6 @@ dependencyResolutionManagement {
   }
 }
 
-rootProject.name = "LFGIT
+rootProject.name = "LFGIT"
 
 include(":app")
