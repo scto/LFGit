@@ -25,6 +25,24 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+          
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+      
+      - name: sdkmanager install
+        run: sdkmanager tools platform-tools
+		
+      - name: Setup Android SD
+        uses: nttld/setup-ndk@v1
+        id: setup-ndk
+        with:
+          ndk-version: r21e
+          add-to-path: false
+        
+      - name: Install CMake in the Android SDK
+        # This is the same version of cmake that is found in build.gradle. This
+        # will be used to build libavif and the JNI bindings.
+        run: sdkmanager "cmake;3.22.1"
 
       - name: Give permission to executable
         run: chmod +x gradlew
