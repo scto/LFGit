@@ -102,10 +102,9 @@ dependencies {
 
 	annotationProcessor(libs.androidx.room.compiler)
 
-	testImplementation(libs.androidx.room.room.testing)
+	testImplementation(libs.androidx.room.testing)
 
 	implementation(libs.compose.preference.library)
-
 
 	implementation(libs.androidx.constraintlayout)
 	implementation(libs.androidx.swiperefreshlayout)
@@ -115,11 +114,11 @@ dependencies {
 	implementation(libs.kotlin.stdlib.jdk7)
 
     implementation(libs.commons.io)
-	implementation(libs.commons.lang3)
+    implementation(libs.commons.lang3)
 
     testImplementation(libs.junit)
-	androidTestImplementation(libs.androidx.test.ext)
-	androidTestImplementation(libs.androidx.test.espresso.core)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 
     coreLibraryDesugaring(libs.androidx.desugar)
 }
