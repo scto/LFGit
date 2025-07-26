@@ -1,7 +1,7 @@
 package com.lfgit.install;
 
 public interface AsyncTaskListener {
-    void onTaskStarted();
+  void onTaskStarted();
 
-    void onTaskFinished(Boolean installed);
+  void onTaskFinished(Boolean installed);
 }

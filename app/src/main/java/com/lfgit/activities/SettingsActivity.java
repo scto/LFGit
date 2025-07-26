@@ -1,22 +1,20 @@
 package com.lfgit.activities;
+
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.lfgit.R;
 import com.lfgit.fragments.SettingsFragment;
 
-/**
- * An activity providing preference settings.
- */
+/** An activity providing preference settings. */
 public class SettingsActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings_activity);
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.settings, new SettingsFragment())
-                .commit();
-    }
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.settings_activity);
+    getSupportFragmentManager()
+        .beginTransaction()
+        .replace(R.id.settings, new SettingsFragment())
+        .commit();
+  }
 }
