@@ -37,7 +37,7 @@ junit-version = "1.2.1"
 espresso-core = "3.6.1"
 orbit = "0.39.0"
 
-room_version = "2.2.5"
+room = "2.2.5"
 
 commons-io = "2.14.0"
 commons-lang3 = "3.10"
