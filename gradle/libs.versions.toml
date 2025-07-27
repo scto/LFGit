@@ -24,7 +24,16 @@ p7zip = "v1.7.2"
 lifecycle-extensions = "2.2.0"
 lifecycle-runtime = "2.8.7"
 activity-compose = "1.10.1"
-kotlin = "2.0.20"
+constraintlayout = "2.0.1"
+swiperefreshlayout = "1.1.0"
+drawerlayout = "1.1.1"
+annotationVersion = "1.7.0"
+kotlin20 = "2.0.21"
+kotlin21 = "2.1.20"
+kotlin = "2.1.21"
+kotlinGradlePluginAnnotations = "1.9.24"
+ksp = "2.1.21-2.0.1"
+
 compose-bom = "2025.02.00"
 termux-shared = "0.118.1"
 datastore = "1.1.1"
@@ -32,6 +41,7 @@ accompanist = "0.36.0"
 coil = "3.0.3"
 aboutLibraries = "11.6.3"
 webkit = "1.12.1"
+
 junit = "4.13.2"
 junit-version = "1.2.1"
 espresso-core = "3.6.1"
@@ -41,23 +51,21 @@ room = "2.2.5"
 
 commons-io = "2.14.0"
 commons-lang3 = "3.10"
-
-androidx-constraintlayout = "2.0.1"
-androidx-swiperefreshlayout = "1.1.0"
-androidx-drawerlayout = "1.1.1"
+hilt = "2.54"
+dagger = "2.54"
 
 [libraries]
 
 # AndroidX
-androidx-annotation = { module = "androidx.annotation:annotation", version = "1.9.1" }
+androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "annotationVersion" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version = "1.7.0" }
 androidx-browser = { module = "androidx.browser:browser", version.ref = "browser" }
 androidx-core = { module = "androidx.core:core", version = "1.15.0" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version = "1.15.0" }
 androidx-desugar = { module = "com.android.tools:desugar_jdk_libs", version = "2.1.5" }
-androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "androidx-constraintlayout" }
-androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "androidx-swiperefreshlayout" }
-androidx-drawerlayout = { module = "androidx.drawerlayout:drawerlayout", version.ref = "androidx-drawerlayout" }
+androidx-constraintLayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
+androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
+androidx-drawerlayout = { module = "androidx.drawerlayout:drawerlayout", version.ref = "drawerlayout" }
 androidx-fragment_ktx = { module = "androidx.fragment:fragment-ktx", version = "1.8.6" }
 androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "material-icons-extended" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
@@ -78,10 +86,6 @@ androidx-room-rxjava2 = { module = "androidx.room:room-rxjava2", version.ref = "
 androidx-room-guava = { module = "androidx.room:room-guava", version.ref = "room" }
 androidx-room-testing = { module = "androidx.room:room-testing", version.ref = "room" }
 
-# Commons
-commons-io = { module = "commons-io:commons-io", version.ref = "commons-io" }
-commons-lang3 = { module = "org.apache.commons:commons-lang3", version.ref = "commons-lang3" }
-
 # Google
 google-generativeai = { module = "com.google.ai.client.generativeai:generativeai", version.ref = "generativeai" }
 google-guava = { module = "com.google.guava:guava", version = "33.3.1-jre" }
@@ -89,6 +93,15 @@ google-gson = { module = "com.google.code.gson:gson", version = "2.11.0" }
 google-material = { module = "com.google.android.material:material", version = "1.12.0" }
 google-accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
 google-accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
+google-dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
+google-dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
+
+# Hilt
+google-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+google-hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
+google-hilt-android-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
+google-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
+google-hilt-core = { module = "com.google.dagger:hilt-core", version.ref = "hilt" }
 
 # Common
 common-editor = { module = "io.github.Rosemoe.sora-editor:editor", version.ref = "editor" }
@@ -109,7 +122,10 @@ compose-markdown = { module = "com.github.jeziellago:compose-markdown", version.
 org-eclipse-jgit = { module = "org.eclipse.jgit:org.eclipse.jgit", version.ref = "jgit" }
 org-eclipse-lsp4j = { module = "org.eclipse.lsp4j:org.eclipse.lsp4j", version.ref = "lsp4j" }
 org-eclipse-lsp4j-jsonrpc = { module = "org.eclipse.lsp4j:org.eclipse.lsp4j.jsonrpc", version.ref = "lsp4j" }
+apache-commons-io = { module = "commons-io:commons-io", version.ref = "commons-io" }
+apache-commons-lang3 = { module = "org.apache.commons:commons-lang3", version.ref = "commons-lang3" }
 bsh = { module = "org.beanshell:bsh", version.ref = "bsh" }
+
 androidsvg = { module = "com.caverock:androidsvg-aar", version.ref = "androidsvg" }
 aboutlibraries-core = { module = "com.mikepenz:aboutlibraries-core", version.ref = "aboutLibraries" }
 aboutlibraries-compose-m3 = { module = "com.mikepenz:aboutlibraries-compose-m3", version.ref = "aboutLibraries" }
@@ -142,6 +158,13 @@ coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 kotlin-stdlib-jdk7 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk7", version.ref = "kotlin"}
+kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin"}
+ksp = { module = "com.google.devtools.ksp:symbol-processing", version.ref = "ksp" }
+kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+ksp-gradle-plugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+room-gradle-plugin = { group = "androidx.room", name = "room-gradle-plugin", version.ref = "room" }
+kotlin-detekt-gradle-plugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
+kotlin-detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
 
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit-version" }
@@ -154,6 +177,11 @@ orbit-icons = { module = "kiwi.orbit.compose:icons", version.ref = "orbit" }
 android-application = { id = "com.android.application", version = "8.8.2" }
 android-library = { id = "com.android.library", version = "8.8.2" }
 kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 aboutlibraries = { id = "com.mikepenz.aboutlibraries.plugin", version.ref = "aboutLibraries" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+room = { id = "androidx.room", version.ref = "room" }
+kotlin-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }

@@ -3,6 +3,10 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin)
+	//alias(libs.plugins.hilt)
+	//alias(libs.plugins.ksp)
+	alias(libs.plugins.room)
+	//alias(libs.plugins.kotlin.detekt)
 }
 
 android {
@@ -25,7 +29,11 @@ android {
             }
         }
     }
-
+    /*
+	room {
+        schemaDirectory "$projectDir/schemas"
+    }
+	*/
     signingConfigs {
         create("general") {
             storeFile = file("test.keystore")
@@ -100,8 +108,10 @@ dependencies {
 	implementation(libs.androidx.room.guava)
 	implementation(libs.androidx.room.rxjava2)
 
+    implementation(libs.androidx.room.runtime)
+	//ksp(libs.androidx.room.compiler)
 	annotationProcessor(libs.androidx.room.compiler)
-
+    
 	testImplementation(libs.androidx.room.testing)
 
 	implementation(libs.compose.preference.library)
@@ -114,11 +124,11 @@ dependencies {
 	implementation(libs.kotlin.stdlib.jdk7)
 
     implementation(libs.commons.io)
-    implementation(libs.commons.lang3)
+	implementation(libs.commons.lang3)
 
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+	androidTestImplementation(libs.androidx.junit)
+	androidTestImplementation(libs.androidx.espresso.core)
 
     coreLibraryDesugaring(libs.androidx.desugar)
 }
