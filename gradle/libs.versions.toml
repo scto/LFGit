@@ -66,7 +66,7 @@ androidx-desugar = { module = "com.android.tools:desugar_jdk_libs", version = "2
 androidx-constraintLayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
 androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
 androidx-drawerlayout = { module = "androidx.drawerlayout:drawerlayout", version.ref = "drawerlayout" }
-androidx-fragment_ktx = { module = "androidx.fragment:fragment-ktx", version = "1.8.6" }
+androidx-fragment_ktx = { module = "androidx.fragment:fragment-ktx", version = "1.8.8" }
 androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "material-icons-extended" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
 androidx-navigation-safe-args-gradle-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "androidx-navigation" }
