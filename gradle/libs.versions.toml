@@ -39,7 +39,7 @@ orbit = "0.39.0"
 
 room = "2.2.5"
 
-commons-io = "2.14.0"
+commons-io = "2.20.0"
 commons-lang3 = "3.10"
 
 androidx-constraintlayout = "2.0.1"
