@@ -34,7 +34,7 @@ kotlin = "2.1.21"
 kotlinGradlePluginAnnotations = "1.9.24"
 ksp = "2.1.21-2.0.1"
 
-compose-bom = "2025.02.00"
+compose-bom = "2025.07.00"
 termux-shared = "0.118.1"
 datastore = "1.1.1"
 accompanist = "0.36.0"
