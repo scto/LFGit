@@ -44,7 +44,7 @@ commons-lang3 = "3.10"
 
 androidx-constraintlayout = "2.0.1"
 androidx-swiperefreshlayout = "1.1.0"
-androidx-drawerlayout = "1.1.1"
+androidx-drawerlayout = "1.2.0"
 
 [libraries]
 
