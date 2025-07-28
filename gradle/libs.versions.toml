@@ -24,9 +24,9 @@ p7zip = "v1.7.2"
 lifecycle-extensions = "2.2.0"
 lifecycle-runtime = "2.8.7"
 activity-compose = "1.10.1"
-constraintlayout = "2.0.1"
-swiperefreshlayout = "1.1.0"
-drawerlayout = "1.1.1"
+constraint-layout = "2.0.1"
+swiperefresh-layout = "1.1.0"
+drawer-layout = "1.1.1"
 annotationVersion = "1.7.0"
 kotlin20 = "2.0.21"
 kotlin21 = "2.1.20"
@@ -65,9 +65,9 @@ androidx-browser = { module = "androidx.browser:browser", version.ref = "browser
 androidx-core = { module = "androidx.core:core", version = "1.15.0" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version = "1.15.0" }
 androidx-desugar = { module = "com.android.tools:desugar_jdk_libs", version = "2.1.5" }
-androidx-constraintLayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
-androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
-androidx-drawerlayout = { module = "androidx.drawerlayout:drawerlayout", version.ref = "drawerlayout" }
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraint-layout" }
+androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefresh-layout" }
+androidx-drawerlayout = { module = "androidx.drawerlayout:drawerlayout", version.ref = "drawer-layout" }
 androidx-fragment_ktx = { module = "androidx.fragment:fragment-ktx", version = "1.8.6" }
 androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "material-icons-extended" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
