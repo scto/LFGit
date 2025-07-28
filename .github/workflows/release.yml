@@ -34,7 +34,7 @@ jobs:
         uses: nttld/setup-ndk@v1
         id: setup-ndk
         with:
-          ndk-version: r21e
+          ndk-version: r28b
           add-to-path: false
       - name: Install CMake in the Android SDK
         # This is the same version of cmake that is found in build.gradle. This
@@ -46,32 +46,10 @@ jobs:
       - name: Build Release APK
         run: ./gradlew assembleRelease
 
-      - name: Get Release Notes
-        id: release_notes
-        run: |
-          RELEASE_NOTES="$(cat RELEASE_NOTES.md)"
-          echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
-          echo "$RELEASE_NOTES" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
-
-      - name: Create GitHub Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
+      - name: Upload Release APK
+        uses: actions/upload-artifact@v4
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: ${{ env.RELEASE_NOTES }}
-          draft: false
-          prerelease: false
-          
-      - name: Upload APK to Release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: app/build/outputs/apk/release/app-release.apk
-          asset_name: app-release.apk
-          asset_content_type: application/vnd.android.package-archive
+          name: app-release
+          path: app/build/outputs/apk/release/app-release.apk
+          if-no-files-found: error
+		  
