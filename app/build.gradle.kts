@@ -124,7 +124,7 @@ dependencies {
     
     testImplementation(libs.androidx.room.testing)
 
-    implementation(libs.compose.preference.library)
+    implementation(libs.androidx.preference)
 
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.swiperefreshlayout)
