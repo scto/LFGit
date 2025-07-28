@@ -124,7 +124,7 @@ dependencies {
 
     implementation(libs.compose.preference.library)
 
-    implementation(libs.androidx.constraintLayout)
+    implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.swiperefreshlayout)
     implementation(libs.androidx.drawerlayout)
     implementation(libs.androidx.lifecycle.extensions)
