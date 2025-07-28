@@ -3,14 +3,9 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin)
-	//alias(libs.plugins.hilt)
-	//alias(libs.plugins.ksp)
-	//alias(libs.plugins.room)
-	//alias(libs.plugins.hilt)
-	//alias(libs.plugins.ksp)
-	alias(libs.plugins.ksp.gradle.plugin)
-	alias(libs.plugins.room.gradle.plugin)
-	//alias(libs.plugins.kotlin.detekt)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.room)
+    //alias(libs.plugins.kotlin.detekt)
 }
 
 android {
