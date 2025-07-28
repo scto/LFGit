@@ -131,8 +131,8 @@ dependencies {
 
     implementation(libs.kotlin.stdlib.jdk7)
 
-    implementation(libs.commons.io)
-    implementation(libs.commons.lang3)
+    implementation(libs.apache.commons.io)
+    implementation(libs.apache.commons.lang3)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
