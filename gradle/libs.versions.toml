@@ -185,5 +185,5 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 aboutlibraries = { id = "com.mikepenz.aboutlibraries.plugin", version.ref = "aboutLibraries" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-room = { id = "androidx.room", version.ref = "room" }
+#room = { id = "androidx.room", version.ref = "room" }
 kotlin-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
