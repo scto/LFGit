@@ -39,6 +39,8 @@ android {
         generateKotlin = true
     }
     */
+
+    /*
     signingConfigs {
         create("general") {
             storeFile = file("test.keystore")
@@ -47,16 +49,18 @@ android {
             storePassword = "teixeira0x"
         }
     }
+    */
 
     buildTypes {
         release {
             isMinifyEnabled = false
-            signingConfig = signingConfigs.getByName("general")
+            //signingConfig = signingConfigs.getByName("general")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
+        /*
         debug {
             applicationIdSuffix = ".debug"
             isMinifyEnabled = false
@@ -66,6 +70,7 @@ android {
                 "proguard-rules.pro"
             )
         }
+        */
     }
 
     compileOptions { isCoreLibraryDesugaringEnabled = true }
