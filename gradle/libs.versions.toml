@@ -54,6 +54,7 @@ commons-lang3 = "3.10"
 hilt = "2.54"
 dagger = "2.54"
 detekt = "1.23.8"
+spotless = "7.0.4"
 
 [libraries]
 
