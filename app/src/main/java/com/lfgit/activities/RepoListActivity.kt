@@ -137,6 +137,7 @@ class RepoListActivity : BasicAbstractActivity() {
     }
 
     /** Save install preference with version code */
+    /*
     inner class InstallPreference {
         private val prefs: SharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         private val currentVersionCode = BuildConfig.VERSION_CODE
@@ -156,7 +157,9 @@ class RepoListActivity : BasicAbstractActivity() {
             const val PREF_VERSION_CODE_KEY = "version_code"
             const val DOESNT_EXIST = -1
         }
+
     }
+    */
 
     private companion object {
         const val ADD_REPO_REQUEST_CODE = 1
