@@ -28,11 +28,17 @@ android {
             }
         }
     }
+
     /*
-	room {
-        schemaDirectory "$projectDir/schemas"
+    room {
+        // The schemas directory contains a schema file for each version of the Room database.
+        // This is required to enable Room auto migrations.
+        // See https://developer.android.com/reference/kotlin/androidx/room/AutoMigration.
+        //schemaDirectory "$projectDir/schemas"
+        schemaDirectory("$projectDir/schemas")
+        generateKotlin = true
     }
-	*/
+    */
     signingConfigs {
         create("general") {
             storeFile = file("test.keystore")
@@ -97,37 +103,35 @@ android {
 }
 
 dependencies {
-	implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-
-	implementation(libs.androidx.appcompat)
-	implementation(libs.androidx.core.ktx)
-
-	implementation(libs.androidx.room.ktx)
-	implementation(libs.androidx.room.rxjava2)
-	implementation(libs.androidx.room.guava)
-	implementation(libs.androidx.room.rxjava2)
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.rxjava2)
+    implementation(libs.androidx.room.guava)
+    implementation(libs.androidx.room.rxjava2)
 
     implementation(libs.androidx.room.runtime)
-	//ksp(libs.androidx.room.compiler)
-	annotationProcessor(libs.androidx.room.compiler)
+    //ksp(libs.androidx.room.compiler)
+    annotationProcessor(libs.androidx.room.compiler)
     
-	testImplementation(libs.androidx.room.testing)
+    testImplementation(libs.androidx.room.testing)
 
-	implementation(libs.compose.preference.library)
+    implementation(libs.compose.preference.library)
 
-	implementation(libs.androidx.constraintlayout)
-	implementation(libs.androidx.swiperefreshlayout)
-	implementation(libs.androidx.drawerlayout)
-	implementation(libs.androidx.lifecycle.extensions)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.swiperefreshlayout)
+    implementation(libs.androidx.drawerlayout)
+    implementation(libs.androidx.lifecycle.extensions)
 
-	implementation(libs.kotlin.stdlib.jdk7)
+    implementation(libs.kotlin.stdlib.jdk7)
 
     implementation(libs.commons.io)
-	implementation(libs.commons.lang3)
+    implementation(libs.commons.lang3)
 
     testImplementation(libs.junit)
-	androidTestImplementation(libs.androidx.junit)
-	androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 
     coreLibraryDesugaring(libs.androidx.desugar)
 }
