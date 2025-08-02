@@ -21,11 +21,10 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         buildConfigField("String", "GIT_COMMIT", "\"$commit\"")
-		/*
+		
 		ndk {
             abiFilters += listOf("arm64-v8a", "x86_64", "armeabi-v7a")
         }
-        */
     }
     
 	externalNativeBuild {
@@ -40,24 +39,14 @@ android {
         create("arm8") {
             dimension = "cpuArch"
             isDefault = true
-            ndk {
-                abiFilters = "arm64-v8a"
-            }
         }
         create("x86_64") {
             dimension = "cpuArch"
-            ndk {
-                abiFilters = "x86_64"
-            }
-        }
         }
 		create("universal") {
             dimension = "cpuArch"
 			// include all default ABIs. with NDK-r16,  it is:
             //   armeabi-v7a, arm64-v8a, x86, x86_64
-            ndk {
-                abiFilters += listOf("arm64-v8a", "x86_64", "armeabi-v7a")
-            }
         }
 	}
 	
@@ -67,8 +56,8 @@ android {
         // This is required to enable Room auto migrations.
         // See https://developer.android.com/reference/kotlin/androidx/room/AutoMigration.
         //schemaDirectory "$projectDir/schemas"
-        //schemaDirectory("$projectDir/schemas")
-        //generateKotlin = true
+        schemaDirectory("$projectDir/schemas")
+        generateKotlin = true
     }
     */
 

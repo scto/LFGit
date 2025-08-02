@@ -1,10 +1,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    
     <data>
         <variable
             name="RepoTasksViewModel"
             type="com.lfgit.view_models.RepoTasksViewModel" />
     </data>
+    
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
@@ -49,7 +51,9 @@
                     android:textIsSelectable="true"
                     android:text="@={RepoTasksViewModel.taskResult}">
                 </TextView>
+                
             </ScrollView>
+            
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <RelativeLayout
@@ -65,6 +69,9 @@
                 android:layout_height="match_parent"
                 android:dividerHeight="0sp" >
             </ListView>
+            
         </RelativeLayout>
+        
     </androidx.drawerlayout.widget.DrawerLayout>
+    
 </layout>
