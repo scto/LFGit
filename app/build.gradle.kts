@@ -11,33 +11,64 @@ plugins {
 
 android {
     namespace = "com.lfgit"
-    ndkVersion = "28.0.13004108"
+    ndkVersion = "28.2.13676358"
 
     defaultConfig {
+        val commit = getGitCommit()
+        
         applicationId = "com.lfgit"
 
         vectorDrawables.useSupportLibrary = true
 
-        ndk {
+        buildConfigField("String", "GIT_COMMIT", "\"$commit\"")
+		/*
+		ndk {
             abiFilters += listOf("arm64-v8a", "x86_64", "armeabi-v7a")
         }
-
-        @Suppress("UnstableApiUsage")
-        externalNativeBuild {
-            cmake {
-                cppFlags += ""
-            }
+        */
+    }
+    
+	externalNativeBuild {
+        cmake {
+            path = file("src/main/cpp/CMakeLists.txt")
         }
     }
+	
+	flavorDimensions += "cpuArch"
 
+    productFlavors {
+        create("arm8") {
+            dimension = "cpuArch"
+            isDefault = true
+            ndk {
+                abiFilters = "arm64-v8a"
+            }
+        }
+        create("x86_64") {
+            dimension = "cpuArch"
+            ndk {
+                abiFilters = "x86_64"
+            }
+        }
+        }
+		create("universal") {
+            dimension = "cpuArch"
+			// include all default ABIs. with NDK-r16,  it is:
+            //   armeabi-v7a, arm64-v8a, x86, x86_64
+            ndk {
+                abiFilters += listOf("arm64-v8a", "x86_64", "armeabi-v7a")
+            }
+        }
+	}
+	
     /*
     room {
         // The schemas directory contains a schema file for each version of the Room database.
         // This is required to enable Room auto migrations.
         // See https://developer.android.com/reference/kotlin/androidx/room/AutoMigration.
         //schemaDirectory "$projectDir/schemas"
-        schemaDirectory("$projectDir/schemas")
-        generateKotlin = true
+        //schemaDirectory("$projectDir/schemas")
+        //generateKotlin = true
     }
     */
 
@@ -51,7 +82,6 @@ android {
         }
     }
     */
-
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -100,45 +130,51 @@ android {
         buildConfig = true
         compose = true
     }
-
-    externalNativeBuild {
-        cmake {
-            path = file("src/main/cpp/CMakeLists.txt")
-            version = "3.22.1"
-        }
-    }
 }
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+    implementation(libs.androidx.activity)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.swiperefreshlayout)
+    implementation(libs.androidx.drawerlayout)
+    implementation(libs.androidx.lifecycle.extensions)
+    implementation(libs.androidx.preference)
+    
+    implementation(libs.google.material)
+    
+    implementation(libs.kotlin.stdlib.jdk7)
+    
+    implementation(libs.apache.commons.io)
+    implementation(libs.apache.commons.lang3)
+    
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.rxjava2)
     implementation(libs.androidx.room.guava)
     implementation(libs.androidx.room.rxjava2)
-
     implementation(libs.androidx.room.runtime)
     //ksp(libs.androidx.room.compiler)
     annotationProcessor(libs.androidx.room.compiler)
     
     testImplementation(libs.androidx.room.testing)
-
-    implementation(libs.androidx.preference)
-
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.swiperefreshlayout)
-    implementation(libs.androidx.drawerlayout)
-    implementation(libs.androidx.lifecycle.extensions)
-
-    implementation(libs.kotlin.stdlib.jdk7)
-
-    implementation(libs.apache.commons.io)
-    implementation(libs.apache.commons.lang3)
-
     testImplementation(libs.junit)
+    
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
     coreLibraryDesugaring(libs.androidx.desugar)
+}
+
+fun getGitCommit(): String {
+    return try {
+        val commit = providers.exec {
+            commandLine("git", "rev-parse", "--short", "HEAD")
+        }.standardOutput.asText.get().trim()
+        println("Git commit: $commit")
+        commit
+    } catch (_: Exception) {
+        ""
+    }
 }
