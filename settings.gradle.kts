@@ -15,7 +15,7 @@ pluginManagement {
         google()
         gradlePluginPortal()
         mavenCentral()
-        maven("https://cache-redirector.jetbrains.com/kotlin.bintray.com/kotlin-plugin")
+        //maven("https://cache-redirector.jetbrains.com/kotlin.bintray.com/kotlin-plugin")
         //maven("https://repo1.maven.org/maven2/")
     }
 }

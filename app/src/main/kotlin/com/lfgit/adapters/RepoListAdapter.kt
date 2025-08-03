@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
+
 import com.lfgit.R
 import com.lfgit.activities.BasicAbstractActivity
 import com.lfgit.activities.RepoTasksActivity
 import com.lfgit.database.model.Repo
 import com.lfgit.view_models.RepoListViewModel
+
 import org.apache.commons.lang3.StringUtils
 
 /** Bind repositories to the view. */
@@ -116,7 +118,8 @@ class RepoListAdapter(
     }
 
     private fun removeRepoDB(repo: Repo) {
-        remove(repo)
+		//remove(repo)
+        remove(repo.id)
         notifyDataSetChanged()
         mRepoListViewModel.deleteRepoById(repo.id)
     }

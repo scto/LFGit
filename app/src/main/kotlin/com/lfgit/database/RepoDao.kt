@@ -38,6 +38,6 @@ interface RepoDao {
     @Query("DELETE FROM repo WHERE id = :repoId")
     fun deleteByRepoId(repoId: Int)
 
-    @Query.("DELETE FROM repo WHERE localPath = :localPath")
+    @Query("DELETE FROM repo WHERE localPath = :localPath")
     fun deleteByLocalPath(localPath: String)
 }
