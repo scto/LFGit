@@ -21,8 +21,8 @@ import com.lfgit.install.InstallTask
  */
 class InstallFragment : Fragment(), AsyncTaskListener {
     private var mProgressDialog: ProgressDialog? = null
-    private var isTaskRunning = false
-    private var isFirstRun = true
+    /* private*/ var isTaskRunning = false
+    /* private*/ var isFirstRun = true
     private var mActivity: RepoListActivity? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {

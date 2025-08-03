@@ -28,8 +28,10 @@ class RepoListActivity : BasicAbstractActivity() {
     private lateinit var mRepoListViewModel: RepoListViewModel
     private lateinit var mRepoListAdapter: RepoListAdapter
     private lateinit var pullToRefresh: SwipeRefreshLayout
-    private val mInstallPref by lazy { InstallPreference() }
-    private val mManager by lazy { supportFragmentManager }
+    private lateinit var mInstallPref: InstallPreference
+	
+	private lateinit var mManager: supportFragmentManager
+    //private val mManager by lazy { supportFragmentManager }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
