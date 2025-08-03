@@ -2,18 +2,15 @@ package com.lfgit.activities
 
 import android.Manifest
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.activity.viewModels
+import androidx.fragment.app.commit
 
-import com.lfgit.R
 import com.lfgit.BuildConfig
+import com.lfgit.R
 import com.lfgit.adapters.RepoListAdapter
 import com.lfgit.databinding.ActivityRepoListBinding
 import com.lfgit.fragments.InstallFragment
@@ -22,56 +19,71 @@ import com.lfgit.utilites.UriHelper
 import com.lfgit.view_models.RepoListViewModel
 
 /**
- * An activity implementing list of repositories and initial installation.
+ * Eine Activity, die die Liste der Repositories und die Erstinstallation implementiert.
  */
 class RepoListActivity : BasicAbstractActivity() {
-    private lateinit var mRepoListViewModel: RepoListViewModel
-    private lateinit var mRepoListAdapter: RepoListAdapter
-    private lateinit var pullToRefresh: SwipeRefreshLayout
-    private lateinit var mInstallPref: InstallPreference
-	
-	private lateinit var mManager: supportFragmentManager
-    //private val mManager by lazy { supportFragmentManager }
+
+    // Verwende View Binding, um auf Views zuzugreifen
+    private lateinit var binding: ActivityRepoListBinding
+    
+    // Verwende den KTX Property-Delegaten, um den ViewModel zu initialisieren
+    private val repoListViewModel: RepoListViewModel by viewModels()
+    
+    private lateinit var repoListAdapter: RepoListAdapter
+    private val installPref = InstallPreference()
+
+    companion object {
+        private const val ADD_REPO_REQUEST_CODE = 1
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Initialisiere View Binding
+        binding = ActivityRepoListBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        mRepoListViewModel = ViewModelProvider(this)[RepoListViewModel::class.java]
-        installIfNeeded(mRepoListViewModel)
+        installIfNeeded(repoListViewModel)
 
-        val mBinding: ActivityRepoListBinding =
-            DataBindingUtil.setContentView(this, R.layout.activity_repo_list)
-        mBinding.lifecycleOwner = this
-        mBinding.repoListViewModel = mRepoListViewModel
+        binding.lifecycleOwner = this
+        binding.repoListViewModel = repoListViewModel
 
-        mRepoListAdapter = RepoListAdapter(this, mRepoListViewModel)
-        mBinding.repoList.adapter = mRepoListAdapter
-        mBinding.repoList.onItemClickListener = mRepoListAdapter
-        mBinding.repoList.onItemLongClickListener = mRepoListAdapter
-
-        mRepoListViewModel.showToast.observe(this, this::showToastMsg)
-
-        mRepoListViewModel.allRepos.observe(this) { repoList ->
-            mRepoListAdapter.setRepos(repoList)
-            mRepoListViewModel.setRepos(repoList)
+        setupUI()
+        observeViewModel()
+    }
+    
+    private fun setupUI() {
+        repoListAdapter = RepoListAdapter(this, repoListViewModel)
+        binding.repoList.apply {
+            adapter = repoListAdapter
+            onItemClickListener = repoListAdapter
+            onItemLongClickListener = repoListAdapter
         }
 
-        mRepoListViewModel.execResult.observe(this) { result ->
-            mRepoListViewModel.processExecResult(result)
-        }
-
-        pullToRefresh = findViewById(R.id.repoListLayout)
-        pullToRefresh.setOnRefreshListener {
-            mRepoListAdapter.refreshRepos()
-            pullToRefresh.isRefreshing = false
+        binding.repoListLayout.setOnRefreshListener {
+            repoListAdapter.refreshRepos()
+            binding.repoListLayout.isRefreshing = false
         }
     }
 
-    /** Install packages if needed, or just ask for permissions */
+    private fun observeViewModel() {
+        repoListViewModel.showToast.observe(this, ::showToastMsg)
+
+        repoListViewModel.allRepos.observe(this) { repoList ->
+            repoListAdapter.setRepos(repoList)
+            repoListViewModel.setRepos(repoList)
+        }
+
+        repoListViewModel.execResult.observe(this) { result ->
+            repoListViewModel.processExecResult(result)
+        }
+    }
+
+    /** Installiert Pakete bei Bedarf oder fragt nur nach Berechtigungen */
     private fun installIfNeeded(viewModel: RepoListViewModel) {
-        if (!viewModel.isInstalling) {
-            if (mInstallPref.isFirstRun) {
-                viewModel.isInstalling = true
+        if (!viewModel.isInstalling()) {
+            if (installPref.isFirstRun()) {
+                viewModel.setInstalling(true)
                 runInstallFragment()
             } else {
                 checkAndRequestPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -80,16 +92,16 @@ class RepoListActivity : BasicAbstractActivity() {
     }
 
     private fun runInstallFragment() {
-        val transaction = mManager.beginTransaction()
-        val fragment = InstallFragment()
-        transaction.add(R.id.repoListLayout, fragment)
-        transaction.commit()
+        // Verwende die Fragment KTX-Erweiterung für eine saubere Transaktion
+        supportFragmentManager.commit {
+            add(R.id.repoListLayout, InstallFragment())
+        }
     }
 
     fun onPackagesInstalled(installed: Boolean) {
-        mRepoListViewModel.isInstalling = false
+        repoListViewModel.setInstalling(false)
         if (installed) {
-            mInstallPref.updateInstallPreference()
+            installPref.updateInstallPreference()
             checkAndRequestPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
             showToastMsg(getString(R.string.install_success))
         } else {
@@ -104,42 +116,67 @@ class RepoListActivity : BasicAbstractActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val intent: Intent
+        // Verwende 'when' anstelle von 'switch'
         when (item.itemId) {
             R.id.menu_settings -> {
-                intent = Intent(this, SettingsActivity::class.java)
-                this.startActivity(intent)
+                startActivity(Intent(this, SettingsActivity::class.java))
             }
             R.id.menu_init_repo -> {
-                intent = Intent(this, AddRepoActivity::class.java)
-                this.startActivity(intent)
+                startActivity(Intent(this, AddRepoActivity::class.java))
             }
             R.id.menu_add_repo -> {
-                intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
+                val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
                 startActivityForResult(intent, ADD_REPO_REQUEST_CODE)
             }
-            R.id.menu_refresh -> mRepoListAdapter.refreshRepos()
+            R.id.menu_refresh -> {
+                repoListAdapter.refreshRepos()
+            }
             else -> return super.onOptionsItemSelected(item)
         }
         return true
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
-        super.onActivityResult(requestCode, resultCode, intent)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == ADD_REPO_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            intent?.data?.let { uri ->
+            // Sicheres Entpacken der URI mit 'let'
+            data?.data?.let { uri ->
                 val path = UriHelper.getStoragePathFromURI(this, uri)
                 when {
-                    path == null -> showToastMsg(application.getString(R.string.storage_not_supported))
-                    Constants.isWritablePath(path) -> mRepoListViewModel.addLocalRepo(path)
-                    else -> showToastMsg(application.getString(R.string.no_write_dir))
+                    path == null -> {
+                        showToastMsg(application.getString(R.string.storage_not_supported))
+                    }
+                    Constants.isWritablePath(path) -> {
+                        repoListViewModel.addLocalRepo(path)
+                    }
+                    else -> {
+                        showToastMsg(application.getString(R.string.no_write_dir))
+                    }
                 }
             }
         }
     }
 
-    private companion object {
-        const val ADD_REPO_REQUEST_CODE = 1
+    /** Speichert die Installationspräferenz mit dem Versionscode */
+    inner class InstallPreference {
+        private val prefsName = "mInstallPref"
+        private val prefVersionCodeKey = "version_code"
+        private val currentVersionCode = BuildConfig.VERSION_CODE
+        private val doesntExist = -1
+
+        private val sharedPreferences by lazy {
+            getSharedPreferences(prefsName, MODE_PRIVATE)
+        }
+
+        fun isFirstRun(): Boolean {
+            val savedVersionCode = sharedPreferences.getInt(prefVersionCodeKey, doesntExist)
+            return currentVersionCode != savedVersionCode
+        }
+
+        fun updateInstallPreference() {
+            // Verwende die KTX 'edit' Erweiterung
+            sharedPreferences.edit().putInt(prefVersionCodeKey, currentVersionCode).apply()
+        }
     }
 }

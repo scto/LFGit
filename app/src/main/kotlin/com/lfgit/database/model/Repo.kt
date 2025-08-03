@@ -2,7 +2,9 @@ package com.lfgit.database.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+
 import com.lfgit.utilites.Constants
+
 import java.io.Serializable
 
 @Entity(tableName = "repo")
