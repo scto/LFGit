@@ -121,7 +121,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.swiperefreshlayout)
     implementation(libs.androidx.drawerlayout)
-    implementation(libs.androidx.lifecycle.extensions)
+    //implementation(libs.androidx.lifecycle.extensions)
     implementation(libs.androidx.preference)
     
     implementation(libs.google.material)
