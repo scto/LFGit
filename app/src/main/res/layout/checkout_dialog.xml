@@ -28,7 +28,6 @@
             bind:layout_constraintTop_toBottomOf="@+id/titleTextView"
             bind:layout_constraintEnd_toEndOf="parent">
         </EditText>
-        
         <Button
             android:id="@+id/enterButton"
             android:layout_width="wrap_content"
@@ -38,7 +37,5 @@
             bind:layout_constraintStart_toStartOf="@+id/editText"
             bind:layout_constraintTop_toBottomOf="@+id/editText">
         </Button>
-        
     </androidx.constraintlayout.widget.ConstraintLayout>
-    
 </layout>

@@ -2,7 +2,6 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:bind="http://schemas.android.com/apk/res-auto">
-    
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -28,7 +27,6 @@
             bind:layout_constraintTop_toBottomOf="@+id/titleTextView"
             bind:layout_constraintEnd_toEndOf="parent">
         </EditText>
-        
         <Button
             android:id="@+id/enterButton"
             android:layout_width="wrap_content"
@@ -38,7 +36,5 @@
             bind:layout_constraintStart_toStartOf="@+id/editText"
             bind:layout_constraintTop_toBottomOf="@+id/editText">
         </Button>
-        
     </androidx.constraintlayout.widget.ConstraintLayout>
-    
 </layout>
