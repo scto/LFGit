@@ -22,33 +22,25 @@ android {
 
         buildConfigField("String", "GIT_COMMIT", "\"$commit\"")
 		
-		ndk {
-            abiFilters += listOf("arm64-v8a", "x86_64", "armeabi-v7a")
-        }
     }
     
-	externalNativeBuild {
+	//add this
+    externalNativeBuild {
+        ndkVersion = "28.2.13676358" // ndk version
+
+        // If using CMake
+		/*
         cmake {
+            version = "4.0.3" // replace with the version of cmake you installed
             path = file("src/main/cpp/CMakeLists.txt")
         }
-    }
-	
-	flavorDimensions += "cpuArch"
+		*/
 
-    productFlavors {
-        create("arm8") {
-            dimension = "cpuArch"
-            isDefault = true
+        // If using ndk-build
+        ndkBuild {
+            path = file("src/main/cpp/Android.mk")
         }
-        create("x86_64") {
-            dimension = "cpuArch"
-        }
-		create("universal") {
-            dimension = "cpuArch"
-			// include all default ABIs. with NDK-r16,  it is:
-            //   armeabi-v7a, arm64-v8a, x86, x86_64
-        }
-	}
+    }
 	
     /*
     room {
